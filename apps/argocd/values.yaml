@@ -1,0 +1,19 @@
+argo-cd:
+  configs:
+    params:
+      server.insecure: true
+  server:
+    autoscaling:
+      maxReplicas: 2
+    clusterAdminAccess:
+      enabled: true
+  controller:
+    clusterAdminAccess:
+      enabled: true
+  repoServer:
+    autoscaling:
+      maxReplicas: 2
+    clusterAdminAccess:
+      enabled: true
+repository:
+  url: https://github.com/iamKunal/home-k8s-gitops.git

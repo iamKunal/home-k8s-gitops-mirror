@@ -1,0 +1,52 @@
+environments:
+  with-crds:
+
+---
+
+repositories:
+  - name: argo-cd
+    url: https://argoproj.github.io/argo-helm
+  - name: external-secrets
+    url: https://charts.external-secrets.io/
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  - name: external-secrets
+    namespace: external-secrets
+    createNamespace: true
+    chart: ../../apps/external-secrets
+    disableValidation: true
+    disableValidationOnInstall: true
+    disableOpenAPIValidation: true
+    wait: true
+    waitForJobs: true
+    values:
+      - external-secrets:
+          installCRDs: {{ eq .Environment.Name "with-crds" }}
+  - name: argocd
+    chart: ../../apps/argocd
+    namespace: argocd
+    createNamespace: true
+    needs: [external-secrets/external-secrets, projectcontour/contour]
+    disableValidation: true
+    disableValidationOnInstall: true
+    disableOpenAPIValidation: true
+    values:
+      - argo-cd:
+          crds:
+            install: {{ eq .Environment.Name "with-crds" }}
+  - name: contour
+    namespace: projectcontour
+    createNamespace: true
+    chart: ../../apps/contour
+    disableValidation: true
+    disableValidationOnInstall: true
+    disableOpenAPIValidation: true
+    wait: true
+    waitForJobs: true
+    # No need to be cautious, contour does a good job here
+#    values:
+#      - contour:
+#          contour:
+#            manageCRDS: {{ eq .Environment.Name "with-crds" }}

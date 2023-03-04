@@ -1,0 +1,30 @@
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+name: hackali-kind
+containerdConfigPatches:
+  - |-
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry.docker.home.stackpwn.in:80"]
+      endpoint = ["http://registry.docker.home.stackpwn.in:80"]
+
+nodes:
+  - role: control-plane
+    extraMounts:
+      - hostPath: /home/assaxor/local-cluster/data
+        containerPath: /local-cluster/data
+    extraPortMappings:
+    - hostPort: 80
+      containerPort: 80
+      listenAddress: "0.0.0.0"
+      protocol: TCP
+    - hostPort: 443
+      containerPort: 443
+      listenAddress: "0.0.0.0"
+      protocol: TCP
+    - hostPort: 53
+      containerPort: 53
+      listenAddress: "0.0.0.0"
+      protocol: UDP
+    - hostPort: 53
+      containerPort: 53
+      listenAddress: "0.0.0.0"
+      protocol: TCP

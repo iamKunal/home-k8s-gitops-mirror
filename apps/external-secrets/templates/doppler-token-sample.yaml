@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.configuration.doppler.secret.name }}
+type: Opaque
+stringData:
+  {{.Values.configuration.doppler.secret.key }}: "dp.st.prd.<token here>"

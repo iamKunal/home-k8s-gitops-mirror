@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-apps
+spec:
+  generators:
+    - git:
+        repoURL: "{{ .Values.repository.url }}"
+        revision: HEAD
+        files:
+          - path: "apps/**/config.json"
+  template:
+    metadata:
+      name: '{{`{{name}}`}}'
+    spec:
+      source:
+        repoURL: "{{ .Values.repository.url }}"
+        targetRevision: HEAD
+        path: '{{`{{path}}`}}'
+      destination:
+        name: 'in-cluster'
+        namespace: '{{`{{namespace}}`}}'
+      project: 'default'
+{{/*      project: '{{`{{project}}`}}'*/}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

@@ -1,0 +1,9 @@
+docker-registry:
+  service:
+    port: 80
+  persistence:
+    enabled: true
+    existingClaim: docker-registry-kind
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000

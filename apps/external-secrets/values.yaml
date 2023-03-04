@@ -1,0 +1,9 @@
+external-secrets:
+#  installCRDs: true
+  webhook:
+    create: true
+configuration:
+  doppler:
+    secret:
+      name: doppler-token-auth-api
+      key: dopplerToken

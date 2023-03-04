@@ -1,0 +1,25 @@
+name: Helm Lint
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  helm-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Helm
+      uses: azure/setup-helm@v3
+      with:
+         token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+    - name: Download helm dependencies
+      run: find apps/ -name config.json -exec $SHELL -c 'echo {} && helm dependency update $(dirname {})' \;
+    - name: Run Helm Lint
+      run: find apps/ -name config.json -exec dirname {} \; | xargs helm lint
+    - name: Setup helmfile
+      uses: mamezou-tech/setup-helmfile@v1.2.0
+    - name: Run helmfile lint
+      run: helmfile lint -f cluster-setup/first-run/
+
