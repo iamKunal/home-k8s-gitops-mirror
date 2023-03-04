@@ -1,6 +1,6 @@
 # Home K8s Gitops
 
-[![Helm Lint](../../actions/workflows/helm-lint.yaml/badge.svg?branch=main)](../../actions/workflows/helm-lint.yaml)
+[![Helm Lint](../../actions/workflows/helm-lint.yaml/badge.svg)](../../actions/workflows/helm-lint.yaml)
 
 ## Creating the kind cluster
 
