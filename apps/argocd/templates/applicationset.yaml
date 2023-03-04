@@ -18,8 +18,9 @@ spec:
         targetRevision: HEAD
         path: '{{`{{path}}`}}'
         helm:
-          valueFiles:
-            - /helmValues/secrets.yaml
+          parameters:
+            - name: "domain.suffix"
+              value: ".home.stackpwn.in"
 
       destination:
         name: 'in-cluster'

@@ -15,14 +15,6 @@ argo-cd:
       maxReplicas: 2
     clusterAdminAccess:
       enabled: true
-    volumeMounts:
-      - name: helm-values
-        mountPath: /helmValues
-    volumes:
-      - name: helm-values
-        secret:
-          secretName: argo-helm-secret-values
-          optional: true
 
 repository:
   url: https://github.com/iamKunal/home-k8s-gitops.git
