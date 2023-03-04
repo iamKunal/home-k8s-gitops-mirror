@@ -17,6 +17,10 @@ spec:
         repoURL: "{{ .Values.repository.url }}"
         targetRevision: HEAD
         path: '{{`{{path}}`}}'
+        helm:
+          valueFiles:
+            - /helmValues/secrets.yaml
+
       destination:
         name: 'in-cluster'
         namespace: '{{`{{namespace}}`}}'

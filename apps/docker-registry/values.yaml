@@ -7,3 +7,6 @@ docker-registry:
   securityContext:
     fsGroup: 1000
     runAsUser: 1000
+
+domain:
+  suffix: ""

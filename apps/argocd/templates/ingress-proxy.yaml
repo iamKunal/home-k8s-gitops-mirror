@@ -1,0 +1,12 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ include "argocd.fullname" . }}-server
+spec:
+  virtualhost:
+    fqdn: "argocd{{ .Values.domain.suffix }}"
+
+  routes:
+    - services:
+        - name: {{ include "argocd.fullname" . }}-server
+          port: {{ index .Values "argo-cd" "server" "service" "servicePortHttp" }}
