@@ -16,7 +16,17 @@ kind create cluster --config cluster-setup/kind/cluster-config.yaml
 
 Create account on `Doppler`, and get a service token.
 
-Store secrets `ES_DOPPLER_SECRET_TOKEN`, `ARGO_GITHUB_USERNAME` and `ARGO_GITHUB_PASSWORD` in the same env as the service token.
+Store secrets the following secrets in the same env for which the service token was created:
+- `ARGO_GITHUB_PASSWORD` - GitHub username
+- `ARGO_GITHUB_USERNAME` - GitHub Token with Read access to the repo
+- `ARGO_UI_ADMIN_PASSWORD` - Admin UI Password for Argo.
+- `ES_DOPPLER_SECRET_TOKEN` - The service token just created. Should help with bootstrapping Doppler
+
+To get all secrets that are to be configured run:
+```shell
+find apps/ -name config.json -exec $SHELL -c 'helm dependency update $(dirname {}) >/dev/null && helm template $(dirname {})' \; | yq -N 'select(.kind == "ExternalSecret") | .spec.data[].remoteRef.key' | sort | uniq
+```
+
 
 Create a copy of [`apps/external-secrets/templates/doppler-token-sample.yaml`](apps/external-secrets/templates/doppler-token-sample.yaml) to `apps/external-secrets/templates/doppler-token.yaml` and add in the doppler service token for configuring external secrets.
 
