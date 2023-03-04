@@ -1,0 +1,5 @@
+{
+  "name": "docker-registry-ui",
+  "namespace": "docker-registry",
+  "project": "devops"
+}

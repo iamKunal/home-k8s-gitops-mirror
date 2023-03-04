@@ -1,0 +1,12 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ template "docker-registry-ui.fullname" . }}
+spec:
+  virtualhost:
+    fqdn: "ui.registry.docker{{ .Values.domain.suffix }}"
+
+  routes:
+    - services:
+        - name: {{ template "docker-registry-ui.fullname" . }}
+          port: {{ .Values.service.port }}
