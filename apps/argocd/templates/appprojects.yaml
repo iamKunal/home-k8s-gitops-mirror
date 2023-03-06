@@ -1,0 +1,17 @@
+{{- range $project := (( .Files.Get "projects.yaml" | fromYaml).projects) }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ $project.name | quote}}
+spec:
+  description: {{ $project.description | quote }}
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - '*'
+---
+{{- end }}

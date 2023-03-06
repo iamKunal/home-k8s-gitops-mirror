@@ -25,8 +25,8 @@ spec:
       destination:
         name: 'in-cluster'
         namespace: '{{`{{namespace}}`}}'
-      project: 'default'
-{{/*      project: '{{`{{project}}`}}'*/}}
+{{/*      project: 'default'*/}}
+      project: '{{`{{project}}`}}'
       syncPolicy:
         automated:
           prune: true

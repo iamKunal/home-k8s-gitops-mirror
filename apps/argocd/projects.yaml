@@ -1,0 +1,7 @@
+projects:
+  - name: misc
+    description: Miscellaneous stuff
+  - name: devops
+    description: Required for basic cluster setup
+  - name: media-server
+    description: Downloading, streaming, uploading media in general
