@@ -1,0 +1,8 @@
+plugins:
+  services:
+    cmd: "./listServices.sh"
+    pipe: false
+inputFiles:
+  - nginx.tmpl.conf
+outputFiles:
+  - nginx.conf

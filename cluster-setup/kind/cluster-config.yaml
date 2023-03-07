@@ -20,15 +20,3 @@ nodes:
       containerPort: 443
       listenAddress: "0.0.0.0"
       protocol: TCP
-    - hostPort: 53
-      containerPort: 53
-      listenAddress: "0.0.0.0"
-      protocol: UDP
-    - hostPort: 53
-      containerPort: 53
-      listenAddress: "0.0.0.0"
-      protocol: TCP
-    - hostPort: 445
-      containerPort: 445
-      listenAddress: "0.0.0.0"
-      protocol: TCP

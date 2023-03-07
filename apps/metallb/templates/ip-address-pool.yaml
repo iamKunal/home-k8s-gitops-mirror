@@ -1,0 +1,14 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: kind-docker-address-pool
+spec:
+  addresses:
+    # docker network inspect -f '{{`{{.IPAM.Config}}`}}' kind
+    - 172.18.255.200-172.18.255.255
+{{/*    - 192.168.1.65-192.168.1.65*/}}
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: empty
