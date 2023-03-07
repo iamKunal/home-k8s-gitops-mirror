@@ -9,19 +9,20 @@ spec:
         revision: HEAD
         files:
           - path: "apps/**/config.json"
+  goTemplate: true
   template:
     metadata:
-      name: '{{`{{name}}`}}'
+      name: '{{`{{. name }}`}}'
       annotations:
-        "kubernetes.io/description": '{{`{{description}}`}}'
+        "kubernetes.io/description": '{{`{{ .description }}`}}'
     spec:
       info:
         - name: description
-          value: '{{`{{description}}`}}'
+          value: '{{`{{ .description }}`}}'
       source:
         repoURL: "{{ .Values.repository.url }}"
         targetRevision: HEAD
-        path: '{{`{{path}}`}}'
+        path: '{{`{{ .path.path }}`}}'
         helm:
           parameters:
             - name: "domain.suffix"
@@ -29,9 +30,15 @@ spec:
 
       destination:
         name: 'in-cluster'
-        namespace: '{{`{{namespace}}`}}'
-{{/*      project: 'default'*/}}
-      project: '{{`{{project}}`}}'
+        namespace: '{{`{{ .namespace }}`}}'
+      project: '{{`{{ .project }}`}}'
+      ignoreDifferences:
+        {{- range $index, $crdName := list "addresspools.metallb.io" "bgppeers.metallb.io" }}
+        - kind: CustomResourceDefinition
+          name: {{ $crdName }}
+          jsonPointers:
+            - /spec/conversion/webhook/clientConfig/caBundle
+        {{- end }}
       syncPolicy:
         automated:
           prune: true
