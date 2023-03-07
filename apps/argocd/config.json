@@ -1,5 +1,6 @@
 {
   "name": "argocd",
   "namespace": "argocd",
-  "project": "devops"
+  "project": "devops",
+  "description": "The Gitops Controller"
 }

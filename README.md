@@ -43,3 +43,16 @@ helmfile apply -f cluster-setup/first-run/
 ArgoCD should then pick up all the apps from the repo automatically.
 
 For any new changes, just make changes to repository and argo should pick them up.
+
+## Setting up TCP Forwarding for non-tcp services
+
+Contour's `HTTPProxy` does not support TCP services (and for ports other than `80`/`443`).
+
+For that, MetalLb's `LoadBalancer` is utilized.
+
+Required dependency is `gomplate`, can be installed via `brew`
+
+To generate `nginx.conf` for TCP Forwarding via nginx, and start it as a TCP Proxy for LoadBalancers for the cluster, run the following at the root of the repo:
+```shell
+./startTcpForwarding.sh
+```
