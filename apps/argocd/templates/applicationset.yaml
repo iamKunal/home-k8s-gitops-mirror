@@ -12,6 +12,8 @@ spec:
   template:
     metadata:
       name: '{{`{{name}}`}}'
+      annotations:
+        "kubernetes.io/description": '{{`{{description}}`}}'
     spec:
       info:
         - name: description
