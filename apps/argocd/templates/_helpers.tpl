@@ -22,3 +22,37 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 {{- end }}
+
+
+{{- define "argocd.gh-webhook.fullname" -}}
+{{ default "gh-webhook" }}
+{{- end }}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "argocd.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+
+{{/*
+Common labels
+*/}}
+{{- define "argocd.gh-webhook.labels" -}}
+helm.sh/chart: {{ include "argocd.chart" . }}
+{{ include "argocd.gh-webhook.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "argocd.gh-webhook.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "argocd.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/component: "gh-webhook"
+{{- end }}

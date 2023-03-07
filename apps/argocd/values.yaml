@@ -21,3 +21,10 @@ repository:
 
 domain:
   suffix: ""
+
+ghWebhook:
+  image:
+    repository: "registry.docker.home.stackpwn.in:80/gh-cli"
+    tag: latest
+    pullPolicy: IfNotPresent
+  events: "push"

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "argocd.gh-webhook.fullname" . }}
+  labels:
+    {{- include "argocd.gh-webhook.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "argocd.gh-webhook.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "argocd.gh-webhook.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "argocd.gh-webhook.fullname" . }}
+          args:
+            - webhook
+            - forward
+            - --repo={{ .Values.repository.url | trimPrefix "https://github.com/"}}
+            - --events={{ .Values.ghWebhook.events }}
+            - --url="argocd{{ .Values.domain.suffix }}"
+          env:
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: GH_TOKEN
+                  name: "gh-webhook"
+          image: "{{ .Values.ghWebhook.image.repository }}:{{ .Values.ghWebhook.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.ghWebhook.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
