@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       name: '{{`{{name}}`}}'
+      namespace: '{{`{{namespace}}`}}'
     spec:
       source:
         repoURL: "{{ .Values.repository.url }}"
