@@ -28,3 +28,4 @@ ghWebhook:
     tag: latest
     pullPolicy: IfNotPresent
   events: "push"
+  replicaCount: 1

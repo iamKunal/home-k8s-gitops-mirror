@@ -5,9 +5,7 @@ metadata:
   labels:
     {{- include "argocd.gh-webhook.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: {{ .Values.ghWebhook.replicaCount }}
   selector:
     matchLabels:
       {{- include "argocd.gh-webhook.selectorLabels" . | nindent 6 }}
