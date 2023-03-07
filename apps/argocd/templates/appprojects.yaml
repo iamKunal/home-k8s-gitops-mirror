@@ -13,5 +13,7 @@ spec:
     server: '*'
   sourceRepos:
   - '*'
+  orphanedResources:
+    warn: true
 ---
 {{- end }}
