@@ -12,7 +12,7 @@ spec:
   goTemplate: true
   template:
     metadata:
-      name: '{{`{{. name }}`}}'
+      name: '{{`{{ .name }}`}}'
       annotations:
         "kubernetes.io/description": '{{`{{ .description }}`}}'
     spec:
