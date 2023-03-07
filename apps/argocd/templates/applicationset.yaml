@@ -12,8 +12,10 @@ spec:
   template:
     metadata:
       name: '{{`{{name}}`}}'
-      namespace: '{{`{{namespace}}`}}'
     spec:
+      info:
+        - name: description
+          value: '{{`{{description}}`}}'
       source:
         repoURL: "{{ .Values.repository.url }}"
         targetRevision: HEAD
