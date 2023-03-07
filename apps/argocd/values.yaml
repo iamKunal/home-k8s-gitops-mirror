@@ -28,4 +28,4 @@ ghWebhook:
     tag: latest
     pullPolicy: Always
   events: "push"
-  replicaCount: 1
+  replicaCount: 0
