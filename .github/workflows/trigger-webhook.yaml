@@ -1,0 +1,23 @@
+name: Trigger ArgoCD Webhook
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  trigger-webhook:
+    timeout-minutes: 2
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'iamKunal/home-k8s-gitops' }}
+
+    steps:
+    - name: Setup Tailscale
+      uses: tailscale/github-action@main
+      with:
+        authkey: ${{ secrets.TAILSCALE_EPHEMERAL_KEY }}
+    - name: Webhook
+      uses: distributhor/workflow-webhook@v2
+      env:
+        webhook_type: json-extended
+        webhook_url: ${{ secrets.ARGO_WEBHOOK_URL }}
+        webhook_secret: ${{ secrets.ARGO_WEBHOOK_SECRET }}
