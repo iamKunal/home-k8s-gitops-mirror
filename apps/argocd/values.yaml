@@ -3,8 +3,9 @@ argo-cd:
     params:
       server.insecure: true
       controller.log.level: debug
+    secret:
+      createSecret: false
   server:
-
     autoscaling:
       maxReplicas: 2
     clusterAdminAccess:
