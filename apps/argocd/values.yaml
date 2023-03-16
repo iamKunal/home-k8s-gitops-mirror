@@ -4,15 +4,6 @@ argo-cd:
       server.insecure: true
       controller.log.level: debug
   server:
-    config:
-      resource.compareoptions: |
-        # if ignoreAggregatedRoles set to true then differences caused by aggregated roles in RBAC resources are ignored.
-        ignoreAggregatedRoles: true
-        # disables status field diffing in specified resource types
-        # 'crd' - CustomResourceDefinitions (default)
-        # 'all' - all resources
-        # 'none' - disabled
-        ignoreResourceStatusField: all
 
     autoscaling:
       maxReplicas: 2
