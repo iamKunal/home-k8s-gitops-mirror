@@ -1,3 +1,4 @@
+{{- if .Values.ghCliWebhookForwarder.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     {{- include "argocd.gh-webhook.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.ghWebhook.replicaCount }}
+  replicas: {{ .Values.ghCliWebhookForwarder.replicaCount }}
   selector:
     matchLabels:
       {{- include "argocd.gh-webhook.selectorLabels" . | nindent 6 }}
@@ -28,7 +29,7 @@ spec:
             - webhook
             - forward
             - --repo={{ .Values.repository.url | trimPrefix "https://github.com/"}}
-            - --events={{ .Values.ghWebhook.events }}
+            - --events={{ .Values.ghCliWebhookForwarder.events }}
             - --url="argocd{{ .Values.domain.suffix }}"
           env:
             - name: GH_TOKEN
@@ -36,8 +37,8 @@ spec:
                 secretKeyRef:
                   key: GH_TOKEN
                   name: "gh-webhook"
-          image: "{{ .Values.ghWebhook.image.repository }}:{{ .Values.ghWebhook.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.ghWebhook.image.pullPolicy }}
+          image: "{{ .Values.ghCliWebhookForwarder.image.repository }}:{{ .Values.ghCliWebhookForwarder.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.ghCliWebhookForwarder.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
@@ -53,3 +54,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

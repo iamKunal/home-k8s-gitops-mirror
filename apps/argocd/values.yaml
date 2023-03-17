@@ -24,7 +24,12 @@ repository:
 domain:
   suffix: ""
 
-ghWebhook:
+github:
+  webhookSecret:
+    enabled: true
+
+ghCliWebhookForwarder:
+  enabled: false
   image:
     repository: "registry.docker.home.stackpwn.in:80/gh-cli"
     tag: latest
