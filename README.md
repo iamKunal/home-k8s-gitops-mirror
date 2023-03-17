@@ -43,7 +43,7 @@ ArgoCD should then pick up all the apps from the repo automatically.
 
 For any new changes, just make changes to repository and argo should pick them up.
 
-## Setting up TCP Forwarding for non-tcp services
+## Setting up TCP Forwarding for non-http services
 
 Contour's `HTTPProxy` does not support TCP services (and for ports other than `80`/`443`).
 
