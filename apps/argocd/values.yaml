@@ -35,4 +35,4 @@ ghCliWebhookForwarder:
     tag: latest
     pullPolicy: Always
   events: "push"
-  replicaCount: 0
+  replicaCount: 1
