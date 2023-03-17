@@ -7,6 +7,12 @@ configuration:
     secret:
       name: doppler-token-auth-api
       key: dopplerToken
+    push:
+      enabled: false
+      secret:
+        name: doppler-push-token-auth-api
+        key: dopplerToken
+
     pushSecret:
       name: doppler-push-token-auth-api
       key: dopplerToken
