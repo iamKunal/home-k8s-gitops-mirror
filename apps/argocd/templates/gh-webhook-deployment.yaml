@@ -28,7 +28,7 @@ spec:
           args:
             - webhook
             - forward
-            - --repo={{ .Values.repository.url | trimPrefix "https://github.com/"}}
+            - --repo={{ .Values.repository.url | trimPrefix "https://github.com/" | trimSuffix ".git" }}
             - --events={{ .Values.ghCliWebhookForwarder.events }}
             - --url="argocd{{ .Values.domain.suffix }}"
           env:
