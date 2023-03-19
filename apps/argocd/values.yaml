@@ -29,7 +29,7 @@ github:
     enabled: true
 
 ghCliWebhookForwarder:
-  enabled: false
+  enabled: true
   image:
     repository: "registry.docker.home.stackpwn.in:80/gh-cli"
     tag: latest
