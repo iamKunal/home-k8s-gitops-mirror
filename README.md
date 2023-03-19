@@ -1,6 +1,6 @@
 # Home K8s Gitops
 
-[![Helm Lint](../../actions/workflows/helm-lint.yaml/badge.svg)](../../actions/workflows/helm-lint.yaml) [![Trigger ArgoCD Webhook](../../actions/workflows/trigger-webhook.yaml/badge.svg)](../../actions/workflows/trigger-webhook.yaml) [![Mirror to Public Repo](../../actions/workflows/public-mirror.yaml/badge.svg)](../../actions/workflows/public-mirror.yaml)
+[![Helm Lint](../../actions/workflows/helm-lint.yaml/badge.svg)](../../actions/workflows/helm-lint.yaml) [![Mirror to Public Repo](../../actions/workflows/public-mirror.yaml/badge.svg)](../../actions/workflows/public-mirror.yaml)
 ## Creating the kind cluster
 
 1. Modify [`cluster-setup/kind/cluster-config.yaml`](cluster-setup/kind/cluster-config.yaml) to suit your needs. Especially the extraMounts.
