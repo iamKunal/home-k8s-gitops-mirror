@@ -31,7 +31,7 @@ spec:
             - --repo={{ .Values.repository.url | trimPrefix "https://github.com/" | trimSuffix ".git" }}
             - --secret=$(WEBHOOK_SECRET)
             - --events={{ .Values.ghCliWebhookForwarder.events }}
-            - --url=argocd{{ .Values.domain.suffix }}/api/webhook
+            - --url=http://argocd{{ .Values.domain.suffix }}/api/webhook
           env:
             - name: GH_TOKEN
               valueFrom:
@@ -41,8 +41,8 @@ spec:
             - name: WEBHOOK_SECRET
               valueFrom:
                 secretKeyRef:
-                  key: argocd-secret
-                  name: "webhook.github.secret"
+                  key: "webhook.github.secret"
+                  name: argocd-secret
           image: "{{ .Values.ghCliWebhookForwarder.image.repository }}:{{ .Values.ghCliWebhookForwarder.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.ghCliWebhookForwarder.image.pullPolicy }}
           resources:
