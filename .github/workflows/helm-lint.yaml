@@ -16,11 +16,14 @@ jobs:
       with:
          token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
     - name: Download helm dependencies
-      run: find apps/ -name config.json -exec $SHELL -c 'echo {} && helm dependency update $(dirname {})' \;
+      run: afind apps/ -name config.json -exec $SHELL -c 'echo {} && helm dependency update $(dirname {})' \;
     - name: Run Helm Lint
       run: find apps/ -name config.json -exec dirname {} \; | xargs helm lint
     - name: Setup helmfile
       uses: mamezou-tech/setup-helmfile@v1.2.0
     - name: Run helmfile lint
       run: helmfile lint -f cluster-setup/first-run/
-
+    - uses: sarisia/actions-status-discord@v1
+      if: failure()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
