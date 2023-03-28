@@ -90,3 +90,5 @@ Chart.lock
 
 
 mirror-token.pat
+
+!.idea/jsonSchemas.xml
