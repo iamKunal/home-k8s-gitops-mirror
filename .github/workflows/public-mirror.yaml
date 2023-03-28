@@ -33,4 +33,7 @@ jobs:
           git -c user.name='Github Actions' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit --author 'Kunal Gupta <assaxor@gmail.com>' -m '${{ github.event.head_commit.message }}' && \
           git push \
         )
-        
+    - uses: sarisia/actions-status-discord@v1
+      if: failure()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
