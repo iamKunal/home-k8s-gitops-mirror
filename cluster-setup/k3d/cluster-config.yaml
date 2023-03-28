@@ -3,3 +3,36 @@ apiVersion: k3d.io/v1alpha4
 kind: Simple
 metadata:
   name: hackali-k3d
+ports:
+  - port: "80:80"
+    nodeFilters:
+      - loadbalancer
+  - port: "443:443"
+    nodeFilters:
+      - loadbalancer
+registries:
+  config: |
+    mirrors:
+      "registry.docker.home.stackpwn.in:80":
+        endpoint:
+          - http://registry.docker.home.stackpwn.in:80
+
+
+volumes:
+  - volume: /home/assaxor/local-cluster/data:/local-cluster/data
+    nodeFilters:
+      - server:0
+      - agent:*
+
+options:
+  k3s:
+    extraArgs:
+      - arg: "--disable=traefik" # we use contour
+        nodeFilters:
+          - "server:*"
+      - arg: "--disable=servicelb" # we use metallb
+        nodeFilters:
+          - "server:*"
+      - arg: "--disable=metrics-server" # we deploy it ourselves
+        nodeFilters:
+          - "server:*"

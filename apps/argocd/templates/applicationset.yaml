@@ -27,6 +27,8 @@ spec:
           parameters:
             - name: "domain.suffix"
               value: ".home.stackpwn.in"
+            - name: "storageClassName" # standard for kind, local-path for k3d
+              value: "local-path"
 
       destination:
         name: 'in-cluster'

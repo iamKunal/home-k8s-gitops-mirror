@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: docker-registry-kind
 spec:
-  storageClassName: standard
+  storageClassName: {{ hasKey .Values "storageClassName" | ternary .Values.storageClassName "standard" }}
   accessModes:
     - ReadWriteOnce
   capacity:
