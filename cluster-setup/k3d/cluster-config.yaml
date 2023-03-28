@@ -23,6 +23,9 @@ volumes:
     nodeFilters:
       - server:0
       - agent:*
+  - volume: /usr/share/zoneinfo:/usr/share/zoneinfo
+    nodeFilters:
+      - server:*
 
 options:
   k3s:
