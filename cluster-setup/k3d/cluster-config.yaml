@@ -23,7 +23,7 @@ volumes:
     nodeFilters:
       - server:0
       - agent:*
-  - volume: /usr/share/zoneinfo:/usr/share/zoneinfo
+  - volume: /usr/share/zoneinfo:/usr/share/zoneinfo # for some weird reason, k3s image does not have necessary tz data
     nodeFilters:
       - server:*
 
