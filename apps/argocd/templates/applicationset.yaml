@@ -29,6 +29,8 @@ spec:
               value: ".home.stackpwn.in"
             - name: "storageClassName" # standard for kind, local-path for k3d
               value: "local-path"
+            - name: "cluster.type"
+              value: "k3d"
 
       destination:
         name: 'in-cluster'
