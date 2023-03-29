@@ -36,3 +36,7 @@ ghCliWebhookForwarder:
     pullPolicy: Always
   events: "push"
   replicaCount: 1
+
+notifications:
+  discord:
+    enabled: true

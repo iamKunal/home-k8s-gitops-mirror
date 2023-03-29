@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  {{- if .Values.notifications.discord.enabled }}
+  service.webhook.discord: |
+    url: "$discord-webhook-url?wait=true"
+    headers:
+      - name: Content-Type
+        value: application/json
+  template.notify-discord: |
+    webhook:
+      discord:
+        method: POST
+        body: |
+          {
+            "content": "{{`{{ .app.metadata.name }}`}}: {{`{{ .app.status.sync.status }}`}}",
+            "embeds": [
+              {
+                "title": "Revision {{`{{ .app.status.sync.revision }}`}}",
+                "description": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Message }}`}}",
+                "author": {
+                  "name": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Author }}`}}"
+                },
+                "url": "{{`{{ (trimAll ".git" .app.spec.source.repoURL) }}`}}/commit/{{`{{ .app.status.sync.revision }}`}}"
+              }
+            ]
+          }
+  {{- end}}
+
+  trigger.on-health-degraded: |
+    - description: Application Health has degraded
+      send:
+      {{- if .Values.notifications.discord.enabled }}
+      - notify-discord
+      {{- end}}
+      when: app.status.health.status == 'Degraded'
+  trigger.on-sync-failed: |
+    - description: Application Syncing has failed
+      send:
+      {{- if .Values.notifications.discord.enabled }}
+      - notify-discord
+      {{- end}}
+      when: app.status.operationState.phase in ['Error', 'Failed']
+
+
