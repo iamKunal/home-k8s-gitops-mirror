@@ -43,5 +43,10 @@ data:
       - notify-discord
       {{- end}}
       when: app.status.operationState.phase in ['Error', 'Failed']
-
-
+  trigger.on-sync-succeeded: |
+    - description: Application syncing has succeeded
+      send:
+      {{- if .Values.notifications.discord.enabled }}
+      - notify-discord
+      {{- end}}
+      when: app.status.operationState.phase in ['Succeeded']
