@@ -15,18 +15,22 @@ data:
         method: POST
         body: |
           {
-            "content": "{{`{{ .app.metadata.name }}`}}: {{`{{ .app.status.sync.status }}`}}",
-            "embeds": [
-              {
-                "title": "Revision {{`{{ .app.status.sync.revision }}`}}",
-                "description": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Message }}`}}",
-                "author": {
-                  "name": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Author }}`}}"
-                },
-                "url": "{{`{{ (trimAll ".git" .app.spec.source.repoURL) }}`}}/commit/{{`{{ .app.status.sync.revision }}`}}"
-              }
-            ]
+            "content": "Test webhook",
           }
+{{/*        body: |*/}}
+{{/*          {*/}}
+{{/*            "content": "{{`{{ .app.metadata.name }}`}}: {{`{{ .app.status.sync.status }}`}}",*/}}
+{{/*            "embeds": [*/}}
+{{/*              {*/}}
+{{/*                "title": "Revision {{`{{ .app.status.sync.revision }}`}}",*/}}
+{{/*                "description": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Message }}`}}",*/}}
+{{/*                "author": {*/}}
+{{/*                  "name": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Author }}`}}"*/}}
+{{/*                },*/}}
+{{/*                "url": "{{`{{ (trimAll ".git" .app.spec.source.repoURL) }}`}}/commit/{{`{{ .app.status.sync.revision }}`}}"*/}}
+{{/*              }*/}}
+{{/*            ]*/}}
+{{/*          }*/}}
   {{- end}}
 
   trigger.on-health-degraded: |
