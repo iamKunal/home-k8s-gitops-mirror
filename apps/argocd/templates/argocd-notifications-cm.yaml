@@ -60,3 +60,7 @@ data:
       {{- if .Values.notifications.discord.enabled }}
       - discord
       {{- end}}
+      triggers:
+      - on-health-degraded
+      - on-sync-failed
+      - on-sync-succeeded
