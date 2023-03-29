@@ -59,4 +59,3 @@ data:
       triggers:
       - on-health-degraded
       - on-sync-failed
-      - on-sync-succeeded
