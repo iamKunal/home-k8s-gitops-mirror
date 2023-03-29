@@ -23,6 +23,7 @@ data:
                 "author": {
                   "name": "{{`{{ (call .repo.GetCommitMetadata .app.status.sync.revision).Author }}`}}"
                 },
+                "color": {{`{{ if eq .app.status.operationState.phase "Succeeded" }}`}}5763719{{`{{ else }}`}}15548997{{`{{ end }}`}},
                 "url": "{{`{{ (trimAll ".git" .app.spec.source.repoURL) }}`}}/commit/{{`{{ .app.status.sync.revision }}`}}"
               }
             ]
