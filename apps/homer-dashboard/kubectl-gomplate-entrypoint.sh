@@ -20,4 +20,10 @@ mkfifo $FIFO_FILE
 kubectl get httpproxies --watch --all-namespaces > $FIFO_FILE &
 kubectl get configmap --watch > $FIFO_FILE &
 
-for_each_line run_gomplate < $FIFO_FILE
+for_each_line run_gomplate < $FIFO_FILE &
+
+
+while true; do
+  run_gomplate
+  sleep 1m
+done
