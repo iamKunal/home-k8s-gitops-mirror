@@ -14,11 +14,11 @@ spec:
     metadata:
       name: '{{`{{ .name }}`}}'
       annotations:
-        "kubernetes.io/description": '{{`{{ .description }}`}}'
+        "kubernetes.io/description": '{{`{{ .description | quote }}`}}'
     spec:
       info:
         - name: description
-          value: '{{`{{ .description }}`}}'
+          value: '{{`{{ .description | quote }}`}}'
       source:
         repoURL: "{{ .Values.repository.url }}"
         targetRevision: HEAD
