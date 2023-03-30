@@ -27,6 +27,7 @@ services:
         {{- if (has $argoApp.metadata.annotations "home.stackpwn.in/icon-url") }}
         logo: {{ index $argoApp.metadata.annotations "home.stackpwn.in/icon-url" }}
         {{- end }}
+        keywords: '{{ $proxy.metadata.name }} {{ index $argoApp.metadata.annotations "kubernetes.io/description" }}'
 
       {{- end }}
       {{- end }}
