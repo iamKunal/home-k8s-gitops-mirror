@@ -1,12 +1,12 @@
 # Home K8s Gitops
 
 [![Helm Lint](../../actions/workflows/helm-lint.yaml/badge.svg)](../../actions/workflows/helm-lint.yaml) [![Mirror to Public Repo](../../actions/workflows/public-mirror.yaml/badge.svg)](../../actions/workflows/public-mirror.yaml)
-## Creating the kind cluster
+## Creating the k3d cluser
 
-1. Modify [`cluster-setup/kind/cluster-config.yaml`](cluster-setup/kind/cluster-config.yaml) to suit your needs. Especially the extraMounts.
+1. Modify [`cluster-setup/k3d/cluster-config.yaml`](cluster-setup/k3d/cluster-config.yaml) to suit your needs. Especially the extraMounts.
 2. Run the following to have the cluster up and running
  ```shell
-kind create cluster --config cluster-setup/kind/cluster-config.yaml
+k3d cluster create --config cluster-setup/k3d/cluster-config.yaml
 ```
 
 ## Setting up for first time:
