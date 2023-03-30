@@ -5,9 +5,11 @@ metadata:
   labels:
     {{- include "homer-dashboard.labels" . | nindent 4 }}
 data:
-  "entrypoint.sh": |
-    {{- .Files.Get "kubectl-gomplate-entrypoint.sh" | nindent 4 }}
-  ".gomplate.yaml": |
-    {{- .Files.Get ".gomplate.yaml" | nindent 4 }}
-  "homer-config.tmpl.yaml": |
-    {{- .Files.Get "homer-config.tmpl.yaml" | nindent 4 }}
+  {{- $currentScope := .}}
+  {{- $directory := "homer-config-refresher" }}
+  {{- range $path, $a :=  .Files.Glob  (print $directory "/*") }}
+  {{- with $currentScope}}
+  {{ $path | trimPrefix (print $directory "/") | quote }}: |
+  {{- .Files.Get $path | nindent 4 }}
+      {{- end }}
+  {{ end }}
