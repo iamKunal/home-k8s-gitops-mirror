@@ -1,0 +1,35 @@
+title: "App dashboard"
+#subtitle: "Homer"
+defaults:
+  colorTheme: dark # One of 'auto', 'light', or 'dark'
+
+{{- $proxies := ( kubectl "get" "httpproxy" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name" | yaml).items  }}
+{{- $argoApps := ( kubectl "get" "applications" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name"| yaml).items }}
+{{- $argoProjects := (kubectl "get" "appprojects" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name" | yaml).items }}
+
+services:
+  {{- range $_, $project := $argoProjects }}
+  - name: {{ $project.metadata.name }}
+    {{- if (has $project.metadata.annotations "home.stackpwn.in/faIcon" ) }}
+    icon: {{ index $project.metadata.annotations "home.stackpwn.in/faIcon" }}
+    {{- end }}
+    items:
+      {{- range $argoApp := $argoApps }}
+      {{- if eq $argoApp.spec.project $project.metadata.name }}
+      {{- range $proxy := $proxies }}
+      {{- if and (eq $argoApp.metadata.name (index $proxy.metadata.labels "argocd.argoproj.io/instance")) (ne "false" (index $proxy.metadata.annotations "home.stackpwn.in/is-ui-service")) }}
+      - name: {{ $proxy.metadata.name }}
+        url: "http://{{ $proxy.spec.virtualhost.fqdn }}"
+        target: "_blank"
+        {{- if (has $argoApp.metadata.annotations "kubernetes.io/description") }}
+        subtitle: {{ index $argoApp.metadata.annotations "kubernetes.io/description" }}
+        {{- end }}
+        {{- if (has $argoApp.metadata.annotations "home.stackpwn.in/icon-url") }}
+        logo: {{ index $argoApp.metadata.annotations "home.stackpwn.in/icon-url" }}
+        {{- end }}
+
+      {{- end }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+  {{- end }}

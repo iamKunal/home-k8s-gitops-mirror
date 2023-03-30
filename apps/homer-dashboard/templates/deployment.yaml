@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "homer-dashboard.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "homer-dashboard.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "homer-dashboard.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: create-emtpy-yml
+          image: alpine
+          imagePullPolicy: IfNotPresent
+          command:
+            - touch
+          args:
+            - /output/config.yml
+          volumeMounts:
+            - mountPath: /output/
+              name: empty
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - mountPath: /www/assets/
+              name: empty
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: "config-refresher"
+          image: "registry.docker.home.stackpwn.in:80/kubectl-gomplate"
+          imagePullPolicy: Always
+          command:
+            - bash
+          workingDir: /work/
+          args:
+            - entrypoint.sh
+          env:
+            - name: OUTPUT_DIR
+              value: /output
+          volumeMounts:
+            - mountPath: /work/
+              name: {{ include "homer-dashboard.fullname" . }}
+            - mountPath: /output/
+              name: empty
+
+      volumes:
+        - name: {{ include "homer-dashboard.fullname" . }}
+          configMap:
+            name: {{ include "homer-dashboard.fullname" . }}
+            defaultMode: 0744
+        - name: empty
+          emptyDir: {}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

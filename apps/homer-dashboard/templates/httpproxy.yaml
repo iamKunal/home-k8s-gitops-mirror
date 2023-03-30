@@ -1,0 +1,12 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: "{{ include "homer-dashboard.fullname" . }}"
+spec:
+  virtualhost:
+    fqdn: "{{ .Values.ingress.ui.host }}{{ .Values.domain.suffix }}"
+
+  routes:
+    - services:
+        - name: "{{ include "homer-dashboard.fullname" . }}"
+          port: {{ index .Values.service.port }}

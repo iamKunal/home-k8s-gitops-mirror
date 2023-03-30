@@ -1,0 +1,7 @@
+{
+  "name": "homer-dashboard",
+  "namespace": "homer-dashboard",
+  "project": "devops",
+  "description": "Dashboard for all the services in the cluster",
+  "iconUrl": "https://raw.githubusercontent.com/bastienwirtz/homer/main/public/logo.png"
+}

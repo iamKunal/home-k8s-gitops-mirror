@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+data:
+  "entrypoint.sh": |
+    {{- .Files.Get "kubectl-gomplate-entrypoint.sh" | nindent 4 }}
+  ".gomplate.yaml": |
+    {{- .Files.Get ".gomplate.yaml" | nindent 4 }}
+  "homer-config.tmpl.yaml": |
+    {{- .Files.Get "homer-config.tmpl.yaml" | nindent 4 }}

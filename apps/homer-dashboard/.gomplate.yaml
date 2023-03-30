@@ -1,0 +1,6 @@
+plugins:
+  kubectl:
+    cmd: kubectl
+    pipe: false
+inputFiles:
+  - homer-config.tmpl.yaml

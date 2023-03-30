@@ -1,0 +1,72 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+
+rules:
+  - apiGroups:
+      - projectcontour.io
+    resources:
+      - httpproxies
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - appprojects
+      - applications
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name:  {{ include "homer-dashboard.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "homer-dashboard.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "homer-dashboard.fullname" . }}
+  labels:
+    {{- include "homer-dashboard.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name:  {{ include "homer-dashboard.serviceAccountName" . }}
+roleRef:
+  kind: Role
+  name: {{ include "homer-dashboard.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
