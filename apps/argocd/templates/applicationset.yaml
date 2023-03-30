@@ -14,11 +14,14 @@ spec:
     metadata:
       name: '{{`{{ .name }}`}}'
       annotations:
+        "home.stackpwn.in/icon-url": '{{`{{ .iconUrl | quote }}`}}'
         "kubernetes.io/description": '{{`{{ .description | quote }}`}}'
     spec:
       info:
         - name: description
           value: '{{`{{ .description | quote }}`}}'
+        - name: iconUrl
+          value: '{{`{{ .iconUrl | quote }}`}}'
       source:
         repoURL: "{{ .Values.repository.url }}"
         targetRevision: HEAD
