@@ -3,6 +3,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: {{ $project.name | quote}}
+  annotations:
+    {{- range $k, $v := $project.annotations }}
+    "home.stackpwn.in/{{ $k }}": {{ $v | quote }}
+    {{- end}}
 spec:
   description: {{ $project.description | quote }}
   clusterResourceWhitelist:

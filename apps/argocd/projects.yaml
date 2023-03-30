@@ -1,7 +1,13 @@
 projects:
   - name: misc
     description: Miscellaneous stuff
+    annotations:
+      faIcon: "fa-solid fa-dice"
   - name: devops
     description: Required for basic cluster setup
+    annotations:
+      faIcon: "fa-solid fa-gears"
   - name: media-server
     description: Downloading, streaming, uploading media in general
+    annotations:
+      faIcon: "fa-solid fa-film"
