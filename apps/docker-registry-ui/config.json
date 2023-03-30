@@ -1,5 +1,7 @@
 {
   "name": "docker-registry-ui",
   "namespace": "docker-registry",
-  "project": "devops"
+  "project": "devops",
+  "description": "Frontend for docker registry",
+  "iconUrl": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
 }

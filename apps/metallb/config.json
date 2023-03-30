@@ -1,5 +1,7 @@
 {
   "name": "metallb",
   "namespace": "metallb-system",
-  "project": "devops"
+  "project": "devops",
+  "descrption": "Load balancer controller",
+  "iconUrl": "https://metallb.universe.tf/images/logo/metallb-white.png"
 }

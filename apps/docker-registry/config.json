@@ -1,5 +1,7 @@
 {
   "name": "docker-registry",
   "namespace": "docker-registry",
-  "project": "devops"
+  "project": "devops",
+  "description": "Internal Docker Registry for k8s",
+  "iconUrl": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
 }

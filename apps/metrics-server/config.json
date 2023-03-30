@@ -1,5 +1,7 @@
 {
   "name": "metrics-server",
   "namespace": "metrics-server",
-  "project": "devops"
+  "project": "devops",
+  "description": "De-facto metrics server for k8s",
+  "iconUrl": "https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg"
 }

@@ -1,5 +1,7 @@
 {
   "name": "external-secrets",
   "namespace": "external-secrets",
-  "project": "devops"
+  "project": "devops",
+  "descrption": "k8s external secrets controller",
+  "iconUrl": "https://raw.githubusercontent.com/external-secrets/external-secrets/main/assets/eso-logo-large.png"
 }
