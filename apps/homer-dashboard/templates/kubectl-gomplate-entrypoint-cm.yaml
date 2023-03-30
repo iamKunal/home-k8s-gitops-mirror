@@ -12,4 +12,4 @@ data:
   {{ $path | trimPrefix (print $directory "/") | quote }}: |
   {{- .Files.Get $path | nindent 4 }}
   {{- end }}
-  {{ end }}
+  {{- end }}
