@@ -3,7 +3,7 @@ kind: HTTPProxy
 metadata:
   name: {{ template "docker-registry.fullname" . }}
   annotations:
-    "home.stackpwn.in/hasUi": "false"
+    "home.stackpwn.in/is-ui-service": "false"
 spec:
   virtualhost:
     fqdn: "registry.docker{{ .Values.domain.suffix }}"
