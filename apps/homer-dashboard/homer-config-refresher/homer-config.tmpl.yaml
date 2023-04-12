@@ -10,6 +10,7 @@ footer:
 
 services:
   {{- range $_, $project := $argoProjects }}
+  {{- if (ne $project.metadata.name "default") }}
   - name: {{ $project.metadata.name }}
     {{- if (has $project.metadata.annotations "home.stackpwn.in/faIcon" ) }}
     icon: {{ index $project.metadata.annotations "home.stackpwn.in/faIcon" }}
@@ -34,4 +35,5 @@ services:
       {{- end }}
       {{- end }}
       {{- end }}
+  {{- end }}
   {{- end }}
