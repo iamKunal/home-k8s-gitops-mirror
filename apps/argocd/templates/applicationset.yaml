@@ -34,6 +34,8 @@ spec:
               value: "local-path"
             - name: "cluster.type"
               value: "k3d"
+            - name: "service.loadBalancer.sharingKey"
+              value: "default-pool"
 
       destination:
         name: 'in-cluster'
