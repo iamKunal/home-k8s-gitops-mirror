@@ -10,6 +10,9 @@ ports:
   - port: "443:443"
     nodeFilters:
       - loadbalancer
+  - port: "53:53"
+    nodeFilters:
+      - loadbalancer
 registries:
   config: |
     mirrors:
