@@ -17,7 +17,9 @@ argo-cd:
       maxReplicas: 2
     clusterAdminAccess:
       enabled: true
-
+  notifications:
+    cm:
+      create: false
 repository:
   url: https://github.com/iamKunal/home-k8s-gitops.git
 
