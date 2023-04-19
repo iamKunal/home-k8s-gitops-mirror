@@ -43,15 +43,15 @@ ArgoCD should then pick up all the apps from the repo automatically.
 
 For any new changes, just make changes to repository and argo should pick them up.
 
-## Setting up TCP Forwarding for non-http services
+## Setting up LoadBalancer Forwarding for non-http services
 
-Contour's `HTTPProxy` does not support TCP services (and for ports other than `80`/`443`).
+Contour's `HTTPProxy` does not support TCP/UDP services (and for ports other than `80`/`443`).
 
 For that, MetalLb's `LoadBalancer` is utilized.
 
 Required dependency is `gomplate`, can be installed via `brew`
 
-To generate `nginx.conf` for TCP Forwarding via nginx, and start it as a TCP Proxy for LoadBalancers for the cluster, run the following at the root of the repo:
+To generate `nginx.conf` for TCP Forwarding via nginx, and start it as a TCP/UDP Proxy for LoadBalancers for the cluster, run the following at the root of the repo:
 ```shell
-./startTcpForwarding.sh
+./startLbForwarding.sh
 ```
