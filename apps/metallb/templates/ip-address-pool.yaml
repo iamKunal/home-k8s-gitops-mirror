@@ -5,8 +5,8 @@ metadata:
 spec:
   addresses:
     # docker network inspect -f '{{`{{.IPAM.Config}}`}}' kind
-{{/*    - 172.18.255.200-172.18.255.255*/}}
-    - 192.168.1.65/32
+    - 172.18.255.200-172.18.255.255
+{{/*    - 192.168.1.65/32*/}}
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
