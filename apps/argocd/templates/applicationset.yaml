@@ -34,8 +34,8 @@ spec:
               value: "local-path"
             - name: "cluster.type"
               value: "k3d"
-            - name: "service.loadBalancer.sharingKey"
-              value: "default-pool"
+            - name: "tailscale.ip"
+              value: "100.125.182.56"
 
       destination:
         name: 'in-cluster'
