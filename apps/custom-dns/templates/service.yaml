@@ -1,0 +1,22 @@
+{{- range $protocol := .Values.service.protocols }}
+{{ with $ }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "custom-dns.fullname" . }}-{{ $protocol | lower }}
+  labels:
+    {{- include "custom-dns.labels" . | nindent 4 }}
+{{/*  annotations:*/}}
+{{/*    "metallb.universe.tf/allow-shared-ip": {{ (.Values.service.loadBalancer | default dict ).sharingKey | default ""  | quote}}*/}}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: dns-{{ $protocol | lower }}
+      protocol: {{ $protocol }}
+      name: dns-{{ $protocol | lower }}
+  selector:
+    {{- include "custom-dns.selectorLabels" . | nindent 4 }}
+{{- end }}
+{{- end }}
