@@ -16,10 +16,13 @@ k3d cluster create --config cluster-setup/k3d/cluster-config.yaml
 Create account on `Doppler`, and get a service token.
 
 Store secrets the following secrets in the same env for which the service token was created:
-- `ARGO_GITHUB_PASSWORD` - GitHub username
-- `ARGO_GITHUB_USERNAME` - GitHub Token with Read access to the repo
+- `ARGO_GITHUB_USERNAME` - GitHub username
+- `ARGO_GITHUB_PASSWORD` - GitHub Token with Read access to the repo
 - `ARGO_UI_ADMIN_PASSWORD` - Admin UI Password for Argo.
 - `ES_DOPPLER_SECRET_TOKEN` - The service token just created. Should help with bootstrapping Doppler
+- `ARGO_DISCORD_SYNC_WEBHOOK` - Discord Webhook URL where ArgoCD can push notifications in case of failures
+- `ARGO_GH_WEBHOOK_TOKEN` - GitHub Token used for the GH Cli which forwards GitHub webhooks to ArgoCD
+- `GITHUB_ACTIONS_ARGO_WEBHOOK_SECRET` - Any secret string to be used for configuring the GitHub webhook
 
 To get all secrets that are to be configured run:
 ```shell
