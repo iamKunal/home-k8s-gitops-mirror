@@ -13,6 +13,9 @@ ports:
   - port: "53:53"
     nodeFilters:
       - loadbalancer
+  - port: "445:445"
+    nodeFilters:
+      - loadbalancer
 registries:
   config: |
     mirrors:
