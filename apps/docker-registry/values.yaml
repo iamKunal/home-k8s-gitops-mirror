@@ -4,6 +4,7 @@ docker-registry:
   persistence:
     enabled: true
     existingClaim: docker-registry-kind
+    deleteEnabled: true
   securityContext:
     fsGroup: 1000
     runAsUser: 1000
