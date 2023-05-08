@@ -49,7 +49,8 @@ do
       DIGEST=$(get_tag_digest "${REPOSITORY}" "${TAG}")
       echo "${DOCKER_REGISTRY}"/"${REPOSITORY}"/manifests/"${DIGEST}"
       URL="${DOCKER_REGISTRY}"/"${REPOSITORY}"/manifests/"${DIGEST}"
-      curl -s -X DELETE -i "$URL"
+      echo "Will delete $URL"
+      curl -v -s -X DELETE -i "$URL"
       echo -------------------------------------------------------------------------------------
       echo
     done
