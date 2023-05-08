@@ -22,14 +22,7 @@ function get_repository_tags {
 function get_tag_digest {
   REPOSITORY="$1"
   TAG="$2"
-  curl -ILs --header "${ACCEPT_HEADER}" "${DOCKER_REGISTRY}"/"${REPOSITORY}"/manifests/"${TAG}" | grep Docker-Content-Digest | awk '{print $2}' | tr -d '\r'
-}
-
-
-function get_tag_digest2 {
-  REPOSITORY="$1"
-  TAG="$2"
-  curl -ILs --header "${ACCEPT_HEADER}" "${DOCKER_REGISTRY}"/"${REPOSITORY}"/manifests/"${TAG}" | grep Docker-Content-Digest | awk '{print $2}' | tr -d '\r'
+  curl -ILs --header "${ACCEPT_HEADER}" "${DOCKER_REGISTRY}"/"${REPOSITORY}"/manifests/"${TAG}" | grep -i Docker-Content-Digest | awk '{print $2}' | tr -d '\r'
 }
 
 REPOSITORIES=$(get_repositories)
