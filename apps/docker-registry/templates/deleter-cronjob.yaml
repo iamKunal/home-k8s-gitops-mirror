@@ -1,0 +1,48 @@
+{{- if .Values.deletion.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ template "docker-registry.fullname" . }}-deleter
+  labels:
+    app: {{ template "docker-registry.name" . }}-deleter
+spec:
+  schedule: {{ .Values.deletion.schedule | quote }}
+  jobTemplate:
+    metadata:
+      labels:
+        app: {{ template "docker-registry.name" . }}-deleter
+      annotations:
+        {{- if .Values.deletion.podAnnotations }}
+        {{ toYaml .Values.deletion.podAnnotations | nindent 8 }}
+        {{- end }}
+    spec:
+      template:
+        spec:
+          containers:
+            - name: old-image-deleter
+              image: "registry.docker.home.stackpwn.in:80/helpful-utilities-docker:latest"
+              imagePullPolicy: "Always"
+              command:
+              - /scripts/delete-old-images.sh
+              volumeMounts:
+                - mountPath: /scripts
+                  name: deletion-script
+                  readOnly: true
+
+          restartPolicy: OnFailure
+          {{- if .Values.deletion.nodeSelector }}
+          nodeSelector: {{ toYaml .Values.nodeSelector | nindent 12 }}
+          {{- end }}
+          {{- if .Values.deletion.affinity }}
+          affinity: {{ toYaml .Values.affinity | nindent 12 }}
+          {{- end }}
+          {{- if .Values.deletion.tolerations }}
+          tolerations: {{ toYaml .Values.deletion.tolerations | nindent 12 }}
+          {{- end }}
+          volumes:
+            - name: deletion-script
+              configMap:
+                name: {{ template "docker-registry.fullname" . }}-deleter
+                defaultMode: 0744
+
+{{- end }}

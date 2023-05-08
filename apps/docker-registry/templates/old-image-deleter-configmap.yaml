@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "docker-registry.fullname" . }}-deleter
+data:
+  {{- $currentScope := .}}
+  {{- $directory := "scripts" }}
+  {{- range $path, $a :=  .Files.Glob  (print $directory "/*") }}
+  {{- with $currentScope}}
+  {{ $path | trimPrefix (print $directory "/") | quote }}: |
+  {{- .Files.Get $path | nindent 4 }}
+  {{- end }}
+  {{- end }}

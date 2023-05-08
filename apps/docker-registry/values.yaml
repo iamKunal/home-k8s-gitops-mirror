@@ -10,5 +10,9 @@ docker-registry:
   garbageCollect:
     enabled: true
 
+deletion:
+  enabled: true
+  schedule: "0 2 * * *"
+
 domain:
   suffix: ""
