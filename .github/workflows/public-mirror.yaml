@@ -1,5 +1,9 @@
 name: Mirror to Public Repo
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+
 on:
   push:
 

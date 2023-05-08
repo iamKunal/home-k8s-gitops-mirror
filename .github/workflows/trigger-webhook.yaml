@@ -1,5 +1,9 @@
 name: Trigger ArgoCD Webhook
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+
 on:
   push:
     branches: [ "main" ]
