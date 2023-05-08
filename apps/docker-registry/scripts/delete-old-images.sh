@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 LIVINGDAYS=${1-150}
 DOCKER_REGISTRY="registry.docker.home.stackpwn.in:80/v2"
