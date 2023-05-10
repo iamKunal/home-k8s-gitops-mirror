@@ -44,6 +44,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - /bin/sh
+          args:
+            - -c
+            - "ln -sf /config/config.yml /www/assets/config.yml && /entrypoint.sh"
           ports:
             - name: http
               containerPort: 8080
@@ -57,7 +62,7 @@ spec:
               path: /
               port: http
           volumeMounts:
-            - mountPath: /www/assets/
+            - mountPath: /config/
               name: empty
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
