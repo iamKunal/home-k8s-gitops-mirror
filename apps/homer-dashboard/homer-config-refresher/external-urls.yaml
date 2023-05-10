@@ -5,6 +5,11 @@ services:
       target: "_blank"
       subtitle: "Managing Secrets Externally"
       logo: "https://dashboard.doppler.com/imgs/logo.png"
+    - name: "Grafana"
+      url: "https://assaxor.grafana.net/"
+      target: "_blank"
+      subtitle: "Managing Secrets Externally"
+      logo: "https://raw.githubusercontent.com/grafana/grafana/main/public/app/plugins/datasource/loki/img/grafana_icon.svg"
   remote:
     - name: "Tailscale Dashboard"
       url: "https://login.tailscale.com/"
