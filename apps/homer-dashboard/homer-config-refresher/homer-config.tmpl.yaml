@@ -37,3 +37,9 @@ services:
       {{- end }}
   {{- end }}
   {{- end }}
+  - name: devops
+    items:
+      - name: "Doppler Dashboard"
+        url: "https://dashboard.doppler.com/"
+        target: "_blank"
+        subtitle: "Managing Secrets"
