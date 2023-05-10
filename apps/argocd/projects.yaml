@@ -11,3 +11,7 @@ projects:
     description: Downloading, streaming, uploading media in general
     annotations:
       faIcon: "fa-solid fa-film"
+  - name: remote
+    description: External access to cluster from outside the home network
+    annotations:
+      faIcon: "fa-solid fa-cloud-arrow-down"

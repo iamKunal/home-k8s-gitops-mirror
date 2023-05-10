@@ -3,5 +3,11 @@ services:
     - name: "Doppler Dashboard"
       url: "https://dashboard.doppler.com/"
       target: "_blank"
-      subtitle: "Managing Secrets"
+      subtitle: "Managing Secrets Externally"
       logo: "https://dashboard.doppler.com/imgs/logo.png"
+  remote:
+    - name: "Tailscale Dashboard"
+      url: "https://login.tailscale.com/"
+      target: "_blank"
+      subtitle: "Tailscale for Remote access to cluster"
+      logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tailscale-Logo-Black.svg"
