@@ -48,7 +48,7 @@ spec:
             - /bin/sh
           args:
             - -c
-            - "ln -sf /config/config.yml /www/assets/config.yml && chmod +x /entrypoint.sh && /entrypoint.sh"
+            - "ln -sf /config/config.yml /www/assets/config.yml && source /entrypoint.sh"
           ports:
             - name: http
               containerPort: 8080
