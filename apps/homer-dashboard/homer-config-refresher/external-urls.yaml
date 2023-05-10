@@ -1,0 +1,7 @@
+services:
+  devops:
+    - name: "Doppler Dashboard"
+      url: "https://dashboard.doppler.com/"
+      target: "_blank"
+      subtitle: "Managing Secrets"
+      logo: "https://dashboard.doppler.com/imgs/logo.png"

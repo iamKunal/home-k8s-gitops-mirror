@@ -4,6 +4,7 @@ defaults:
   colorTheme: dark # One of 'auto', 'light', or 'dark'
 footer:
 
+{{- $externals := datasource "externals" }}
 {{- $proxies := ( kubectl "get" "httpproxy" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name" | yaml).items  }}
 {{- $argoApps := ( kubectl "get" "applications" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name"| yaml).items }}
 {{- $argoProjects := (kubectl "get" "appprojects" "--all-namespaces" "-o" "yaml" "--sort-by=.metadata.name" | yaml).items }}
@@ -35,11 +36,9 @@ services:
       {{- end }}
       {{- end }}
       {{- end }}
+  {{- if has $externals.services $project.metadata.name }}
+{{ index $externals.services $project.metadata.name | toYAML | indent 6 }}
+  {{- end }}
   {{- end }}
   {{- end }}
   - name: devops
-    items:
-      - name: "Doppler Dashboard"
-        url: "https://dashboard.doppler.com/"
-        target: "_blank"
-        subtitle: "Managing Secrets"

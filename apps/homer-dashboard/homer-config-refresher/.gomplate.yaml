@@ -2,5 +2,8 @@ plugins:
   kubectl:
     cmd: kubectl
     pipe: false
+datasources:
+  externals:
+    url: external-urls.yaml
 inputFiles:
   - homer-config.tmpl.yaml
