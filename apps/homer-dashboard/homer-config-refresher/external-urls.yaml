@@ -10,4 +10,4 @@ services:
       url: "https://login.tailscale.com/"
       target: "_blank"
       subtitle: "Tailscale for Remote access to cluster"
-      logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tailscale-Logo-Black.svg"
+      logo: "https://avatars.githubusercontent.com/u/48932923?s=200&v=4"

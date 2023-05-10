@@ -1,7 +1,7 @@
 {
   "name": "custom-dns",
   "namespace": "custom-dns",
-  "project": "devops",
+  "project": "remote",
   "description": "Custom Internal DNS Server for resolving specific queries",
   "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/DNS_logo.png?20180902025407"
 }
