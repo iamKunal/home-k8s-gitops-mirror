@@ -1,3 +1,7 @@
+FROM bitnami/kubectl as kubectl
+
 FROM hairyhenderson/gomplate:alpine
 
-RUN apk add --repository "https://dl-cdn.alpinelinux.org/alpine/edge/testing" --no-cache kubectl bash
+COPY --from=kubectl /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/
+
+RUN apk add --no-cache bash
