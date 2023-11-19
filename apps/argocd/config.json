@@ -3,5 +3,5 @@
   "namespace": "argocd",
   "project": "devops",
   "description": "The Gitops Controller",
-  "iconUrl": "https://cncf-branding.netlify.app/img/projects/argo/icon/color/argo-icon-color.png"
+  "iconUrl": "https://argo-cd.readthedocs.io/en/stable/assets/logo.png"
 }
