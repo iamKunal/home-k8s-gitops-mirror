@@ -10,6 +10,7 @@ docker-registry:
     runAsUser: 1000
   garbageCollect:
     enabled: true
+  priorityClassName: system-node-critical
 
 deletion:
   enabled: true
