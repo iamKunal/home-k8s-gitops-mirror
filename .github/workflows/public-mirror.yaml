@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'iamKunal/home-k8s-gitops' }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout the public mirror
       with:
         repository: iamKunal/home-k8s-gitops-mirror
@@ -25,7 +25,7 @@ jobs:
     - name: Move mirror to correct place
       run: mv mirror ../home-k8s-gitops-mirror
     - name: checkout current repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Install rsync
       run: sudo apt install -y rsync
     - name: Mirror repository with custom settings

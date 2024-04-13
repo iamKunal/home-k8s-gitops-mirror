@@ -27,5 +27,5 @@ icon: https://argo-cd.readthedocs.io/en/stable/assets/logo.png
 
 dependencies:
   - name: argo-cd
-    version: 5.23.5
+    version: 6.7.11
     repository: https://argoproj.github.io/argo-helm
