@@ -24,7 +24,7 @@ jobs:
     - name: Run Helm Lint
       run: find apps/ -name config.json -exec dirname {} \; | xargs helm lint
     - name: Setup helmfile
-      uses: mamezou-tech/setup-helmfile@v1.2.0
+      uses: mamezou-tech/setup-helmfile@v2.0.0
     - name: Run helmfile lint
       run: helmfile lint -f cluster-setup/first-run/
     - uses: sarisia/actions-status-discord@v1
