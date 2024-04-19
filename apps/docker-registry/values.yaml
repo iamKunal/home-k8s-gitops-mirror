@@ -11,6 +11,11 @@ docker-registry:
   garbageCollect:
     enabled: true
   priorityClassName: system-node-critical
+  # https://github.com/twuni/docker-registry.helm/issues/104
+  configData:
+    storage:
+      cache:
+        blobdescriptor: disabled
 
 deletion:
   enabled: true
