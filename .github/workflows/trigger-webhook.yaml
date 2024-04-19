@@ -20,7 +20,7 @@ jobs:
       with:
         authkey: ${{ secrets.TAILSCALE_EPHEMERAL_KEY }}
     - name: Webhook
-      uses: distributhor/workflow-webhook@v2
+      uses: distributhor/workflow-webhook@v3
       env:
         webhook_type: json-extended
         webhook_url: ${{ secrets.ARGO_WEBHOOK_URL }}
